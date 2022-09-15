@@ -1,0 +1,85 @@
+---
+title: "Simple document"
+output:
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+---
+
+```{r, message = FALSE, echo = FALSE}
+library(tidyverse)
+```
+
+
+Legend
+YAML header: The segment at the beginning of the document bracketed by ---s.
+Text + inline R: Written text with simple formatting like # heading, **bold**, and _italic_
+Code chunks: Blocks of code surrounded by ```
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+Use option+command+i for codes {r}
+
+```{r, results='hide'}
+#This is a comment, but usually there is no need for this setup.
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r round(mean(samp),2)`.
+
+Rounding function is round(mean(samp), decimal places)
+
+# Section 3
+
+<!-- to comment a text -->
+
+this is going to make a plot
+
+```{r, chunk_scatterplot}
+plot_df = 
+  tibble(
+    x = rnorm(n = 1000),
+    y = 1 + 2*x^2 + rnorm(n = 1000)
+  )
+plot_df
+
+ggplot(plot_df, aes(x = x)) + geom_histogram()
+
+gpp = ggplot(plot_df,aes(x = x, y = y)) + geom_point()
+
+ggsave("scatter_plot.pdf", heigh = 4, width = 6)
+```
+
+# Section 4
+Learning assessment: Write a named code chunk that creates a dataframe comprised of: a numeric variable containing a random sample of size 500 from a normal variable with mean 1; a logical vector indicating whether each sampled value is greater than zero; and a numeric vector containing the absolute value of each element. Then, produce a histogram of the absolute value variable just created. Add an inline summary giving the median value rounded to two decimal places. What happens if you set eval = FALSE to the code chunk? What about echo = FALSE
+
+```{r}
+example_df = #need to fill the entire dataframe -- 5:18 wouldn't work bc 10 empty rows
+    tibble( #tibble is a function
+      vec_numeric = rnorm(n = 500, mean = 1),
+      vec_logical = vec_numeric > 0,
+      vec_num2 = abs(vec_numeric),
+    )
+ggplot(example_df, aes(x = vec_num2)) + geom_histogram()
+round(median(pull(example_df, vec_num2)), 2)
+```
+
+* list item 1
+* list item 2
+
+First header | second header
+----------- | --------------
+  content 1 | content 1
+  content 2 | content 2
+  
+  

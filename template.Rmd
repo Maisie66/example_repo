@@ -13,6 +13,7 @@ library(tidyverse)
 
 
 Legend
+This is my template file
 YAML header: The segment at the beginning of the document bracketed by ---s.
 Text + inline R: Written text with simple formatting like # heading, **bold**, and _italic_
 Code chunks: Blocks of code surrounded by ```
